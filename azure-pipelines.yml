@@ -1,0 +1,20 @@
+
+
+trigger:
+- CI
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSource: 'spec'
+    versionSpec: '12.x'
+- script: 'npm install'
+displayName: "Instala dependencias"
+- task: PublishTestResults@2
+displayName: 'Gera o Relatório'
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/*.xml'
